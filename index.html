@@ -1,0 +1,33 @@
+<html class="fullWidth fullHeight hideOverflow">
+    <head>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Lobster');
+        </style>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="stylesheet.css">
+        
+    </head>
+    <body class="fullWidth fullHeight">
+        <div id="mainContainer" class="fullWidth fullHeight standardPadding">
+            <div id="titleContainer">
+                <h1 class="appTitle">SpoonSwitch</h1>
+                <h2 class="appSubtitle">Convert recipes from Imperial to Metric.</h2>
+            </div>
+
+            <div id="controlContainer">
+                <textArea id="inputArea" class="controlItem">Insert your recipe here!</textArea>
+                <button id="convertButton" class="actionButton" type="button">Convert!</button>
+            </div>
+        </div>
+        <div id="resultPopup" class="hideResult">
+            <div id="resultContent">
+                <ul id="resultList"></ul>
+                <button id="resultCloseButton" class><img src="icon-close.svg"></button>
+                <button id="resultCopyButton" class="actionButton">
+                    Copy!
+                </button>
+            </div>
+        </div>
+        <script type="text/javascript" src="main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,211 @@
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+   outline: 0;
+}
+
+html {
+    background-color: #272727;
+    font-family: sans-serif;
+    font-size: 12pt;
+    color: whitesmoke;
+    font-family: sans-serif;
+    background-image: url(background-1.jpeg);
+    background-size: 100% auto;
+}
+
+#mainContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#controlContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.actionButton {
+    font-family: 'lobster', cursive;
+    font-size: 24pt;
+    width: 7em;
+    height: 3.5em;
+    border-radius: 500px;
+    background-color: #FF652F;
+    color: whitesmoke;
+    border: 0;
+    transition: transform 0.1s;
+}
+
+
+#resultCopyButton {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%,60%);
+}
+
+#convertButton:hover{
+    transform: scale(1.1, 1.1);
+    transition: all 0.1s;
+}
+
+#convertButton:active {
+    transform: scale(0.95, 0.95);
+    transition: all 0.1s;
+}
+
+#resultCopyButton:hover {
+    transform: translate(-50%, 60%) scale(1.1, 1.1);
+    transition: all 0.1s;
+}
+
+#resultCopyButton:active {
+    transform: translate(-50%, 60%) scale(0.95, 0.95);
+    transition: all 0.1s;
+}
+
+#inputArea {
+    width: 80%;
+    font-size: 12pt;
+    background-color: #272727DD;
+    color: whitesmoke;
+    border-width: 2px;
+    border-color: #747474;
+    border-radius: 2em;
+    padding: 2em;
+}
+
+#resultPopup {
+    z-index: 999;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+}
+
+#resultContent {
+    position: fixed;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 3em;
+    border-radius: 2em;
+    background-color: #272727;
+    max-height: 80vh;
+}
+
+.hideResult {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(1.3,1.3);
+    transition: all 0.1s;
+}
+
+.showResult {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0, 1.0);
+    transition: visibility 0s, transform 0.2s;
+}
+
+#resultCloseButton {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 5vw;
+    height: 5vw;
+    transform: translate(50%, -50%);
+    border-radius: 50%;
+    background-color: #FF652F;
+    border: 0;
+    transition: all 0.1s;
+}
+
+#resultCloseButton:hover {
+    transform: translate(50%, -50%) scale(1.1, 1.1);
+    transition: transform 0.1s;
+}
+
+#resultCloseButton:active {
+    transform: translate(50%, -50%) scale(0.95, 0.95);
+    transition: all 0.1s;
+}
+
+#resultCloseButton img {
+    width: 50%;
+    height: 50%;
+}
+
+#resultDoneCopyIndicator {
+    position: absolute;
+    visibility: visible;
+    top: 50%;
+    right: 50%;
+    width: 5vw;
+    height: 5vw;
+    transform: translate(50%, -50%);
+    border-radius: 50%;
+    background-color: greenyellow;
+    border: 0;
+}
+
+#resultDoneCopyIndicator img {
+    width: 100%;
+    height: 100%;
+}
+
+#resultList {
+    overflow-y: scroll;
+    max-height: 70vh;
+    line-height: 1.4em;
+}
+
+.controlItem {
+    flex-grow: 1;
+    margin: 1em;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+.standardMargin {
+    margin: 24;
+}
+
+.standardPadding {
+    padding:24;
+}
+
+.hideOverflow {
+    overflow: hidden;
+}
+
+.autoOverflow {
+    overflow: auto;
+}
+
+.appTitle {
+    font-family: 'Lobster', cursive;
+    font-size: 48pt;
+    color: #FF652F;
+}
+
+.highlight {
+    background-color: #FF652F;
+    padding: 1px;
+}
