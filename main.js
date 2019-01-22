@@ -23,8 +23,8 @@ class Converter {
         var targetUnit = ""
         
         function processMeasurement(match, values, unit, offset, string) {
-            sourceUnit = unit
-            targetUnit = convertUnit(unit)
+            sourceUnit = unit.toLowerCase()
+            targetUnit = convertUnit(sourceUnit)
             var processedValues = values.replace(valueRegex, processValue)
             return `${processedValues}${processUnit(targetUnit)}`
         }
