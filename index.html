@@ -1,30 +1,30 @@
-<html class="fullWidth fullHeight hideOverflow">
+<html class="fullWidth">
     <head>
         <meta charset="utf-8"/>
         <style>
             @import url('https://fonts.googleapis.com/css?family=Lobster');
         </style>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="stylesheet.css">
         
     </head>
-    <body class="fullWidth fullHeight">
-        <div id="mainContainer" class="fullWidth fullHeight standardPadding">
-            <div id="titleContainer">
-                <h1 class="appTitle">SpoonSwitch</h1>
-                <h2 class="appSubtitle">Convert recipes from Imperial to Metric.</h2>
+    <body class="fullWidth">
+        <div id="mainContainer" class="fullWidth">
+            <div id="titleContainer" class="standardMargin">
+                <h1 class="fontSizeTitle fontLobster fontColorOrange">SpoonSwitch</h1>
+                <h2 class="fontSizeLarge">Convert recipes from Imperial to Metric.</h2>
             </div>
 
-            <div id="controlContainer">
+            <div id="controlContainer" class="standardMargin">
                 <textArea id="inputArea" class="controlItem">Insert your recipe here!</textArea>
-                <button id="convertButton" class="actionButton" type="button">Convert!</button>
+                <button id="convertButton" class="actionButton shapeCapsule fontLobster fontSizeLarge backgroundColorOrange" type="button">Convert!</button>
             </div>
         </div>
         <div id="resultPopup" class="hideResult">
             <div id="resultContent">
                 <ul id="resultList"></ul>
-                <button id="resultCloseButton" class><img src="icon-close.svg"></button>
-                <button id="resultCopyButton" class="actionButton">
+                <button id="resultCloseButton" class="shapeRound backgroundColorOrange">
+                    <img src="resources/icon-close.svg"></button>
+                <button id="resultCopyButton" class="actionButton shapeCapsule fontLobster fontSizeLarge backgroundColorOrange">
                     Copy!
                 </button>
             </div>
