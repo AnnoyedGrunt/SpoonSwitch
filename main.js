@@ -1,4 +1,6 @@
-var measurementRegex = /(\d.+)(?:((?:cup)|(?:ounce)|(?:teaspoon|tsp)|(?:tablespoon|tblsp)|(?:inch)|(?:pound))(?:s|es)?)/gi
+import Measure from "./measure.js"
+
+var measurementRegex = /(\d.+)(?:((?:cup)|(?:ounce)|(?:teaspoon|tsp)|(?:tablespoon|tbsp|tablespoonful)|(?:inch)|(?:pound))(?:s|es)?)/gi
 /*
 The above expression matches a measurement, defined as: a number + (other stuff)? + a unit of measurement
 It has two capture groups: the measurement and the unit (it ignores plurals)
@@ -31,7 +33,7 @@ class Converter {
         
         function processValue(match, left, operator, right, offset, string) {
             var parsedValue = parseValue(match, left, operator, right)
-            var convertedValue = convertValue(parsedValue, sourceUnit, targetUnit)
+            var convertedValue = (new Measure(parsedValue)).from(sourceUnit).to(targetUnit).convert().value
             return formatValue(convertedValue)
         }
         
@@ -40,7 +42,7 @@ class Converter {
         }
         
         function convertUnit(unit) {
-            var unitData = Converter.unitsTable[unit]
+            var unitData = Measure.getUnit(unit)
             return Converter.conversionTable[unitData.type]
         }
         
@@ -57,7 +59,7 @@ class Converter {
         }
         
         function formatValue(value) {
-            var formattedValue = value.toFixed(targetUnit.precision)
+            var formattedValue = (value == Math.round(value))? value : value.toFixed(Converter.precision)
             formattedValue = addHighlight(formattedValue)
             return formattedValue
         }
@@ -70,25 +72,6 @@ class Converter {
     }
 }
 
-const unitsTable = {
-    cup: {type: "volume", measure: 0.236, plural: "s", precision: 1},
-    teaspoon: {type: "volume", measure: 0.005, plural: "s", precision: 1},
-    tablespoon: {type: "volume", measure: 0.015, plural: "s", precision: 1},
-    milliliter: {type: "volume", measure: 0.001, plural: "s", precision: 0},
-    inch: {type: "length", measure: 0.254, plural: "es", precision: 2},
-    centimeter: {type: "length", measure: 0.01, plural: "s", precision: 1},
-    ounce: {type: "weight", measure: 0.028, plural: "s", precision: 2},
-    pound: {type: "weight", measure: 0.453, plural: "s", precision: 2},
-    gram: {type: "weight", measure: 0.001, plural: "s", precision: 0},
-    liter: {type: "volume", measure: 1, plural: "s", precision: 2}
-}
-unitsTable.tsp = unitsTable.teaspoon
-unitsTable.tblsp = unitsTable.tablespoon
-unitsTable.ml = unitsTable.milliliter
-unitsTable.lb = unitsTable.pound
-unitsTable.oz = unitsTable.ounce
-unitsTable.g = unitsTable.gram
-unitsTable.cm = unitsTable.centimeter
 
 const conversionTable = {
     volume: "milliliter",
@@ -96,8 +79,8 @@ const conversionTable = {
     weight: "gram"
 }
 
-Converter.unitsTable = unitsTable
 Converter.conversionTable = conversionTable
+Converter.precision = 2
 
 //---------------
 
@@ -111,9 +94,10 @@ function setOutputText(output) {
     while (outputField.firstChild) {
         outputField.removeChild(outputField.firstChild)
     }
+    
     var lines = output.split("\n")
-    for (var line of lines) {
-        element = document.createElement("LI")
+    for (let line of lines) {
+        let element = document.createElement("LI")
         element.innerHTML = line
         outputField.appendChild(element)
     }
