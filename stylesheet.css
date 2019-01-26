@@ -1,16 +1,25 @@
+:root {
+    --colorAccent: #FF652F;
+    --colorDark: #272727;
+    --colorDarkOverlay: #272727DD;
+    --colorLight: whitesmoke;
+    --colorBlackOverlay: rgb(0,0,0,0.7);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
     font-size: 12pt;
-    border: 0;
     color: whitesmoke;
     outline: 0;
+    border-width: 0;
+    border-color: var(--colorBorder);
 }
 
 html {
-    background-image: url(resources/background-1.jpeg);
+    background-image: url(resources/background-dark.jpeg);
     background-size: 100% auto;
 }
 
@@ -58,12 +67,7 @@ html {
 
 #inputArea {
     width: 80%;
-    background-color: #272727DD;
-    color: whitesmoke;
-    border-width: 2px;
-    border-color: #747474;
-    border-radius: 2em;
-    border-style: solid;
+    background-color: rgb(0,0,0,0);
     padding: 2em;
 }
 
@@ -74,7 +78,7 @@ html {
     height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.7);
+    background-color: var(--colorBlackOverlay);
 }
 
 #resultContent {
@@ -85,7 +89,6 @@ html {
     transform: translate(-50%,-50%);
     padding: 3em;
     border-radius: 2em;
-    background-color: #272727;
     max-height: 80vh;
 }
 
@@ -148,15 +151,28 @@ html {
 }
 
 .standardMargin {
-    margin: 24px;
+    margin: 1rem;
+}
+
+.extraVerticalMargin {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
 }
 
 .standardPadding {
-    padding: 24px;
+    padding: 1rem;
+}
+
+.standardPaddingBottom {
+    padding-bottom: 1rem;
+}
+
+.standardPaddingLeft {
+    padding-left: 1rem;
 }
 
 .fontLobster {
-    font-family: 'Lobster', cursive;
+    font-family: 'Lobster';
 }
 
 .fontSizeTitle {
@@ -167,12 +183,20 @@ html {
     font-size: 24pt;
 }
 
-.fontColorOrange {
-    color: #FF652F;
+.fontColorAccent {
+    color: var(--colorAccent);
 }
 
-.backgroundColorOrange {
-    background-color: #FF652F;
+.fontColorDark {
+    color: var(--colorDark);
+}
+
+.backgroundColorAccent {
+    background-color: var(--colorAccent);
+}
+
+.backgroundColorDark {
+    background-color: var(--colorDark);
 }
 
 .shapeCapsule {
@@ -184,6 +208,31 @@ html {
 }
 
 .highlight {
-    background-color: #FF652F;
+    background-color: var(--colorAccent);
     padding: 1px;
+}
+
+.borderTop {
+    border-top-width: 1px;
+    border-style: solid;
+}
+
+.borderBottom {
+    border-bottom-width: 1px;
+    border-style: solid;
+}
+
+.borderLight {
+    border-width: 1px;
+    border-color: var(--colorLight);
+    border-style: solid;
+}
+
+.flexVertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexCentered {
+    align-items: center;
 }

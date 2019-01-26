@@ -25,9 +25,11 @@ export default class Measure {
         if (!this.value) {throw `Missing a value to convert, use value(value) to set one`}
         if (this.unit.type != this._targetUnit.type) {throw `Mismatching types: source unit '${this.unit.name}' is of type ${this.unit.type}, while target unit ${this._targetUnit.name}' is of type ${this._targetUnit.type}`}
         
+        console.log(this.unit.value)
+        console.log(this._targetUnit.value)
         var convertedValue = (this.value * this.unit.value) / this._targetUnit.value
         this.value = convertedValue
-        this.sourceUnit = this._targetUnit
+        this.unit = this._targetUnit
         this._targetUnit = null
         return this
     }
@@ -59,6 +61,10 @@ Measure.getUnit = function(name) {
     }
 }
 
+Measure.isUnit = function(name, unit) {
+    return (Measure.allUnits(name).name == name)
+}
+
 Measure.allUnits = {}
 
 Measure.createUnit("cup", "cups", "volume", 0.236)
@@ -66,8 +72,9 @@ Measure.createUnit("teaspoon", "teaspoons", "volume", 0.005, ["tsp"])
 Measure.createUnit("tablespoon", "tablespoons", "volume", 0.025, ["tbsp", "tablespoonful"])
 Measure.createUnit("inch", "inches", "length", 0.254)
 Measure.createUnit("ounce", "ounces", "weight", 0.028)
-Measure.createUnit("pound", "pounds", "weight", 0.453, ["lbs"])
+Measure.createUnit("pound", "pounds", "weight", 0.453, ["lb"])
 Measure.createUnit("milliliter", "milliliters", "volume", 0.001, ["ml"])
 Measure.createUnit("liter", "liters", "volume", 1, ["l"])
 Measure.createUnit("centimeter", "centimeters", "length", 0.01, ["cm"])
-Measure.createUnit("gram", "grams", "weight", 0.001, ["g"])
+Measure.createUnit("gram", "grams", "weight", 0.001, ["g", "gr"])
+Measure.createUnit("kilogram", "kilograms", "weight", 1, ["kg", "kilo", "kg"])

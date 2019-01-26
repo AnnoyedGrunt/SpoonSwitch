@@ -1,4 +1,4 @@
-<html class="fullWidth">
+<html>
     <head>
         <meta charset="utf-8"/>
         <style>
@@ -7,24 +7,20 @@
         <link rel="stylesheet" href="stylesheet.css">
         
     </head>
-    <body class="fullWidth">
-        <div id="mainContainer" class="fullWidth">
-            <div id="titleContainer" class="standardMargin">
-                <h1 class="fontSizeTitle fontLobster fontColorOrange">SpoonSwitch</h1>
-                <h2 class="fontSizeLarge">Convert recipes from Imperial to Metric.</h2>
-            </div>
-
-            <div id="controlContainer" class="standardMargin">
-                <textArea id="inputArea" class="controlItem">Insert your recipe here!</textArea>
-                <button id="convertButton" class="actionButton shapeCapsule fontLobster fontSizeLarge backgroundColorOrange" type="button">Convert!</button>
-            </div>
+    <body>
+        <div id="titleContainer" class="standardPaddingBottom standardPaddingLeft">
+            <h1 class="fontSizeTitle fontLobster fontColorAccent">SpoonSwitch</h1>
+        </div>
+        <div id="controlContainer" class="extraVerticalMargin">
+            <textArea id="inputArea" class="controlItem borderLight">Insert your recipe here!</textArea>
+            <button id="convertButton" class="actionButton shapeCapsule fontLobster fontSizeLarge backgroundColorAccent borderLight" type="button">Convert!</button>
         </div>
         <div id="resultPopup" class="hideResult">
-            <div id="resultContent">
+            <div id="resultContent" class ="backgroundColorDark">
                 <ul id="resultList"></ul>
-                <button id="resultCloseButton" class="shapeRound backgroundColorOrange">
+                <button id="resultCloseButton" class="shapeRound backgroundColorAccent">
                     <img src="resources/icon-close.svg"></button>
-                <button id="resultCopyButton" class="actionButton shapeCapsule fontLobster fontSizeLarge backgroundColorOrange">
+                <button id="resultCopyButton" class="actionButton shapeCapsule fontLobster fontSizeLarge backgroundColorAccent">
                     Copy!
                 </button>
             </div>

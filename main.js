@@ -1,6 +1,6 @@
 import Measure from "./measure.js"
 
-var measurementRegex = /(\d.+)(?:((?:cup)|(?:ounce)|(?:teaspoon|tsp)|(?:tablespoon|tbsp|tablespoonful)|(?:inch)|(?:pound))(?:s|es)?)/gi
+var measurementRegex = /(\d.+)(?:((?:cup)|(?:ounce)|(?:teaspoon|tsp)|(?:tablespoon|tbsp|tablespoonful)|(?:inch)|(?:pound|lb))(?:s|es)?)/gi
 /*
 The above expression matches a measurement, defined as: a number + (other stuff)? + a unit of measurement
 It has two capture groups: the measurement and the unit (it ignores plurals)
@@ -20,42 +20,39 @@ class Converter {
         this.addHighlight = addHighlight
     }
     
-    convertRecipe(recipeString) {
-        var sourceUnit = ""
-        var targetUnit = ""
-        
+    convertRecipe(recipeString) {        
         function processMeasurement(match, values, unit, offset, string) {
-            sourceUnit = unit.toLowerCase()
-            targetUnit = convertUnit(sourceUnit)
-            var processedValues = values.replace(valueRegex, processValue)
-            return `${processedValues}${processUnit(targetUnit)}`
+            var sourceUnitName = unit.toLowerCase()
+            var targetUnitName = convertUnit(sourceUnitName)
+            var targetUnit = null
+            var isPlural = false
+            
+            var convertedValues = values.replace(valueRegex, function(match, left, operator, right) {
+                var value = new Measure(parseValue(match, left, operator, right))
+                var convertedValue = value.from(sourceUnitName).to(targetUnitName).convert().value
+                
+                console.log(convertedValue)
+                if (convertedValue >= 1000) {
+                    if (value.unit.name = "gram") {convertedValue = value.to("kilogram").convert().value}
+                    else if (value.unit = "milliliter") {convertedValue = value.to("liter").convert().value}
+                }
+                
+                isPlural = isPlural || (convertedValue != 1)
+                targetUnit = value.unit
+                return formatValue(convertedValue)
+            })
+            
+            var convertedUnitName = formatUnit(isPlural? targetUnit.plural : targetUnit.name)
+            return `${convertedValues}${convertedUnitName}`
         }
         
-        function processValue(match, left, operator, right, offset, string) {
-            var parsedValue = parseValue(match, left, operator, right)
-            var convertedValue = (new Measure(parsedValue)).from(sourceUnit).to(targetUnit).convert().value
-            return formatValue(convertedValue)
-        }
-        
-        function processUnit(unit) {
+        function formatUnit(unit) {
             return addHighlight(`${unit}`)
         }
         
         function convertUnit(unit) {
             var unitData = Measure.getUnit(unit)
             return Converter.conversionTable[unitData.type]
-        }
-        
-        function parseValue(match, left, operator, right) {
-            const isFraction = (operator != null)
-            return isFraction ? (Number(left) / Number(right)) : Number(match)
-        }
-        
-        function convertValue(amount, fromUnit, toUnit) {
-            var fromUnitData = Converter.unitsTable[fromUnit]
-            var toUnitData = Converter.unitsTable[toUnit]
-            var convertedValue = (amount * fromUnitData.measure) / toUnitData.measure
-            return convertedValue
         }
         
         function formatValue(value) {
@@ -68,6 +65,11 @@ class Converter {
             return `<span class='highlight'>${string}</span>`
         }
         
+        function parseValue(whole, left, operator, right) {
+            const isFraction = (operator != null)
+            return isFraction ? (Number(left) / Number(right)) : Number(whole)
+        }
+
         return recipeString.replace(measurementRegex, processMeasurement)
     }
 }
